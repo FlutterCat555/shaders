@@ -1,0 +1,139 @@
+[gd_scene format=4 uid="uid://bessywbenc4in"]
+
+[ext_resource type="PackedScene" uid="uid://crfaxw1cbyr8" path="res://scene.blend" id="1_tvg7k"]
+[ext_resource type="PackedScene" uid="uid://d00apeokih88a" path="res://demos/banner.tscn" id="2_dn1tx"]
+[ext_resource type="PackedScene" uid="uid://c2w35npp31eop" path="res://demos/flag.tscn" id="3_4mr4l"]
+[ext_resource type="PackedScene" uid="uid://dbvi4cdml505t" path="res://demos/flag2.tscn" id="4_rognj"]
+[ext_resource type="Shader" uid="uid://dq5y6xunma2hp" path="res://shader.gdshader" id="5_7px16"]
+[ext_resource type="Texture2D" uid="uid://bmu20nvkhciag" path="res://asset/cloth.png" id="6_kvgkk"]
+[ext_resource type="Shader" uid="uid://bog4j21tk2qly" path="res://prophecy.gdshader" id="7_rognj"]
+[ext_resource type="Texture2D" uid="uid://do0252jfneepd" path="res://asset/depth-blue.png" id="8_7px16"]
+[ext_resource type="Texture2D" uid="uid://bguf162s820qv" path="res://asset/toby.png" id="9_rognj"]
+[ext_resource type="Shader" uid="uid://fbrrl6wy57wx" path="res://cyl.gdshader" id="10_1drse"]
+[ext_resource type="Shader" uid="uid://c2jxfyc86yfha" path="res://colorbanding.gdshader" id="10_7px16"]
+[ext_resource type="Texture2D" uid="uid://cpyxyjqcpn28j" path="res://asset/crumblingrock.png" id="11_rxrja"]
+[ext_resource type="Texture2D" uid="uid://dyfvcca7mp5ye" path="res://asset/crumblingrock-hole.png" id="13_kscp3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_57qmd"]
+
+[sub_resource type="Sky" id="Sky_yf5fn"]
+sky_material = SubResource("ProceduralSkyMaterial_57qmd")
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+background_mode = 2
+sky = SubResource("Sky_yf5fn")
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+adjustment_brightness = 2.0
+adjustment_contrast = 1.25
+adjustment_saturation = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57qmd"]
+shader = ExtResource("5_7px16")
+shader_parameter/limit = 0.345
+shader_parameter/height = 0.35
+shader_parameter/amplitude = 2.775
+
+[sub_resource type="QuadMesh" id="QuadMesh_g4v7s"]
+flip_faces = true
+subdivide_width = 5
+subdivide_depth = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0u6y"]
+shader = ExtResource("7_rognj")
+shader_parameter/tex = ExtResource("8_7px16")
+shader_parameter/foreground = ExtResource("9_rognj")
+shader_parameter/speed = 0.1
+shader_parameter/actualspeed = 2.0
+shader_parameter/simspeed = 0.15
+shader_parameter/backAmplitudeModifier = 1.5
+shader_parameter/scale = 0.5
+shader_parameter/threshold = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_yf5fn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_stdin"]
+shader = ExtResource("10_1drse")
+shader_parameter/tex = ExtResource("11_rxrja")
+shader_parameter/scale = 0.425
+shader_parameter/ascale = 5.0
+shader_parameter/rotation = 0.0
+shader_parameter/colorbands = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvgkk"]
+shader = ExtResource("10_7px16")
+shader_parameter/bands = 8.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o8cxk"]
+texture = ExtResource("11_rxrja")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6br2c"]
+texture = ExtResource("13_kscp3")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_g4v7s"]
+sources/0 = SubResource("TileSetAtlasSource_o8cxk")
+sources/1 = SubResource("TileSetAtlasSource_6br2c")
+
+[node name="Shader" type="Node3D" unique_id=757634479]
+
+[node name="scene" parent="." unique_id=123139095 instance=ExtResource("1_tvg7k")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=759117446]
+environment = SubResource("Environment_g4v7s")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=724938917]
+transform = Transform3D(1, 0, 0, 0, 0.26273283, 0.9648686, 0, -0.9648686, 0.26273283, 2.0782933, 1.1646793, -0.07582617)
+shadow_enabled = true
+
+[node name="Banner2" parent="." unique_id=1250349122 instance=ExtResource("2_dn1tx")]
+transform = Transform3D(0.6919721, -0.026097551, 0.7214524, 0, 0.9993464, 0.036149982, -0.7219243, -0.025014779, 0.6915198, -1.5684158, 1.5, 0.03844142)
+
+[node name="Flag" parent="." unique_id=759367773 instance=ExtResource("3_4mr4l")]
+transform = Transform3D(0.9667194, 0.009248578, -0.25567186, 0, 0.9993464, 0.036149982, 0.25583908, -0.03494689, 0.9660875, -0.5887743, 1.5, -0.767)
+
+[node name="Flag2" parent="." unique_id=210746459 instance=ExtResource("4_rognj")]
+transform = Transform3D(1, 0, 0, 0, 0.9993464, 0.036149982, 0, -0.036149982, 0.9993464, 1.1135862, 1.5, -0.6078395)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1076028436]
+transform = Transform3D(0.9352547, -0.14502074, 0.32290503, 0, 0.9122242, 0.4096914, -0.35397553, -0.3831658, 0.85316193, 0.7531068, 2.1072052, 2.3045955)
+fov = 90.0
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Camera3D" unique_id=983948278]
+material = SubResource("ShaderMaterial_57qmd")
+position = Vector2(-266, 514)
+scale = Vector2(319, 319)
+mesh = SubResource("QuadMesh_g4v7s")
+texture = ExtResource("6_kvgkk")
+
+[node name="_legacy" type="Sprite2D" parent="Camera3D" unique_id=1913108453]
+visible = false
+scale = Vector2(1, 1.1)
+texture = ExtResource("9_rognj")
+
+[node name="prophecy" type="MeshInstance2D" parent="Camera3D" unique_id=1105067218]
+material = SubResource("ShaderMaterial_d0u6y")
+position = Vector2(22, 22)
+scale = Vector2(44, 44)
+mesh = SubResource("QuadMesh_yf5fn")
+
+[node name="cyl" type="MeshInstance2D" parent="Camera3D" unique_id=1008076550]
+material = SubResource("ShaderMaterial_stdin")
+position = Vector2(-21.999996, 22)
+scale = Vector2(44, 44)
+mesh = SubResource("QuadMesh_yf5fn")
+
+[node name="colorband" type="MeshInstance2D" parent="Camera3D" unique_id=1056757677]
+visible = false
+material = SubResource("ShaderMaterial_kvgkk")
+position = Vector2(-66.00001, 22)
+scale = Vector2(44, 44)
+mesh = SubResource("QuadMesh_yf5fn")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Camera3D" unique_id=272110606]
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAD///7/AAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAD+//7/AAAAAAAAAAD+/wEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAUAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wUAAAAAAAAAAAD//wQAAAAAAAAAAAD//wMAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wUAAAAAAAAAAAD+//3/AAAAAAAAAAD+//z/AAAAAAAAAAD+//v/AAAAAAAAAAD///v/AAAAAAAAAAD///z/AAAAAAAAAAD///3/AAAAAAAAAAAAAPz/AAAAAAAAAAAAAPv/AAAAAAAAAAAAAP3/AAAAAAAAAAABAPz/AAAAAAAAAAABAPv/AAAAAAAAAAABAP3/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_g4v7s")

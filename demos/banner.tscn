@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://d00apeokih88a"]
+
+[ext_resource type="Shader" uid="uid://d02fyqd8elrer" path="res://flag.gdshader" id="1_05pf3"]
+[ext_resource type="Texture2D" uid="uid://blt048pt13a8o" path="res://asset/cloth-export.png" id="2_v1jxp"]
+[ext_resource type="Texture2D" uid="uid://b8bjbi5n03xc8" path="res://asset/cloth-export-export.png" id="3_uuosl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvsy8"]
+render_priority = 0
+shader = ExtResource("1_05pf3")
+shader_parameter/tex = ExtResource("2_v1jxp")
+shader_parameter/texEnd = ExtResource("3_uuosl")
+shader_parameter/leny = 2.0
+shader_parameter/amplitude = 4.0
+shader_parameter/speed = 1.0
+shader_parameter/intensityX = 0.065
+shader_parameter/intensityZ = 0.06
+
+[sub_resource type="QuadMesh" id="QuadMesh_yf5fn"]
+material = SubResource("ShaderMaterial_xvsy8")
+subdivide_width = 2
+subdivide_depth = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_yf5fn"]
+size = Vector3(0.1, 1.9722595, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ujg7t"]
+size = Vector3(1.1, 0.1, 0.1)
+
+[node name="Banner" type="Node3D" unique_id=759367773]
+
+[node name="banner" type="MeshInstance3D" parent="." unique_id=279332220]
+extra_cull_margin = 5.0
+mesh = SubResource("QuadMesh_yf5fn")
+
+[node name="post" type="MeshInstance3D" parent="." unique_id=1766598573]
+transform = Transform3D(1, 0, 0, 0, 0.9993464, -0.036149982, 0, 0.036149982, 0.9993464, 0, -0.49649382, -0.10596935)
+mesh = SubResource("BoxMesh_yf5fn")
+
+[node name="top" type="MeshInstance3D" parent="." unique_id=577186989]
+transform = Transform3D(1, 0, 0, 0, 0.9993464, -0.036149982, 0, 0.036149982, 0.9993464, 0, 0.50285256, -0.06981936)
+mesh = SubResource("BoxMesh_ujg7t")
